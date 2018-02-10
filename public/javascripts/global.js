@@ -27,7 +27,7 @@ function populateTable() {
     var tableContent = '';
 
     // jQuery AJAX call for JSON
-    $.getJSON( '/users/userlist', function( data ) {
+    $.getJSON( '/coworking/coworkinglist/', function( data ) {
 
         // Stick our user data array into a userlist variable in the global object
         userListData = data;
@@ -96,7 +96,7 @@ function addUser(event) {
         $.ajax({
             type: 'POST',
             data: newUser,
-            url: '/users/adduser',
+            url: '/coworking/addcoworking/',
             dataType: 'JSON'
         }).done(function( response ) {
 
@@ -139,7 +139,7 @@ function deleteUser(event) {
         // If they did, do our delete
         $.ajax({
             type: 'DELETE',
-            url: '/users/deleteuser/' + $(this).attr('rel')
+            url: '/coworking/deletecoworking/' + $(this).attr('rel')
         }).done(function( response ) {
 
             // Check for a successful (blank) response
