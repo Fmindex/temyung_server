@@ -1,54 +1,50 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to our test
-
+    h1= "Temyung Dashboard"
     // Wrapper
     #wrapper
 
-        // USER INFO
-        #userInfo
-            h2 User Info
+        // Coworking INFO
+        #coworkingInfo
+            h2 Coworking Info
             p
                 strong Name:
-                |  <span id='userInfoName'></span>
+                |  <span id='coworkingInfoName'></span>
                 br
-                strong Age:
-                |  <span id='userInfoAge'></span>
+                strong Img:
+                |  <span id='coworkingInfoImg'></span>
                 br
-                strong Gender:
-                |  <span id='userInfoGender'></span>
-                br
-                strong Location:
-                |  <span id='userInfoLocation'></span>
-        // /USER INFO
+                strong Space:
+                |  <span id='coworkingInfoSpace'></span>
+                //- #editCoworking
+                //- fieldset
+                //-     input#inputSpace(type='text', placeholder='editspace')
+                //-     br
+                //-     button#btnEditCoworking Add Coworking
+        // Coworking INFO
 
-        // USER LIST
-        h2 User List
-        #userList
+        // Coworking LIST
+        h2 Coworking List
+        #coworkingList
             table
                 thead
-                    th UserName
-                    th Email
-                    th Delete?
+                    th Name
+                    th Img
+                    th Space
                 tbody
-        // /USER LIST
+        // Coworking LIST
 
-        // ADD USER
-        h2 Add User
-        #addUser
+        // ADD Coworking
+        h2 Add Coworking
+        #addCoworking
             fieldset
-                input#inputUserName(type='text', placeholder='Username')
-                input#inputUserEmail(type='text', placeholder='Email')
+                input#inputCoworkingName(type='text', placeholder='Name')
+                input#inputCoworkingImg(type='text', placeholder='Img')
                 br
-                input#inputUserFullname(type='text', placeholder='Full Name')
-                input#inputUserAge(type='text', placeholder='Age')
+                input#inputCoworkingSpace(type='text', placeholder='Space')
                 br
-                input#inputUserLocation(type='text', placeholder='Location')
-                input#inputUserGender(type='text', placeholder='gender')
-                br
-                button#btnAddUser Add User
-        // /ADD USER
+                button#btnAddCoworking Add Coworking
+        // /ADD Coworking
 
     // /WRAPPER
