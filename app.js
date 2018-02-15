@@ -11,6 +11,7 @@ var db = monk('localhost:27017/nodetest2');
 
 var routes = require('./routes/index');
 var coworking = require('./routes/coworking');
+var cors = require('cors');
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
