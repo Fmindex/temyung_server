@@ -37,9 +37,9 @@ function populateTable() {
         $.each(data, function(){
             tableContent += '<tr>';
             tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.name + '" title="Show Details">' + this.name + '</a></td>';
-            tableContent += '<td>' + this.img + '</td>';
+            tableContent += '<td rel="' + this.img + '" id="myimg">' + this.img + '</td>';
             tableContent += '<td>' + this.space + '</td>';
-            tableContent += '<td><a href="#" class="linkdeleteuser" rel="' + this._id + '">delete</a></td>';
+            tableContent += '<td><a href="#" class="linkdeleteuser" id="del" rel="' + this._id + '">delete</a></td>';
             tableContent += '</tr>';
         });
 
@@ -49,7 +49,7 @@ function populateTable() {
 };
 
 // Show User Info
-var thisCoworkingName;
+var thisCoworkingName, thisCoworkingId, thisCoworkingImg;
 function showCoworkingInfo(event) {
 
     // Prevent Link from Firing
@@ -57,7 +57,10 @@ function showCoworkingInfo(event) {
 
     // Retrieve username from link rel attribute
     thisCoworkingName = $(this).attr('rel');
-
+    thisCoworkingId = $(del).attr('rel');
+    thisCoworkingImg = $(myimg).attr('rel');
+    
+    console.log(thisCoworkingId);
     // Get Index of object based on id value
     var arrayPosition = coworkingListData.map(function(arrayItem) { return arrayItem.name; }).indexOf(thisCoworkingName);
 
@@ -134,7 +137,6 @@ function deleteCoworking(event) {
 
     // Check and make sure the user confirmed
     if (confirmation === true) {
-
         // If they did, do our delete
         $.ajax({
             type: 'DELETE',
@@ -178,35 +180,30 @@ function editCoworking(event) {
 
         // If it is, compile all user info into one object
         var newCoworking = {
-            'name': $('#coworkingInfoName').val(),
-            'img': $('#coworkingInfoImg').val(),
-            'space': $('#coworkingInfo editCoworking fieldset2 input#inputSpace').val()
+            'name': thisCoworkingName,
+            'img': thisCoworkingImg,
+            'space': $('#editCoworking fieldset2 input#inputSpace').val()
         }
-
+        console.log(newCoworking);
+        console.log(thisCoworkingId);
         // Use AJAX to post the object to our adduser service
         $.ajax({
             type: 'PUT',
             data: newCoworking,
-            url: '/coworking/editcoworking/' + thisCoworkingName,
+            url: '/coworking/editcoworking/' + thisCoworkingId,
             dataType: 'JSON'
         }).done(function( response ) {
 
             // Check for successful (blank) response
-            if (response.msg === '') {
+            
 
                 // Clear the form inputs
-                $('#addCoworking fieldset input').val('');
+                $('#editCoworking fieldset2 input#inputSpace').val('');
+                $('#coworkingInfoSpace').text(newCoworking.space);
 
                 // Update the table
                 populateTable();
-
-            }
-            else {
-
-                // If something goes wrong, alert the error message that our service returned
-                alert('Error: ' + response.msg);
-
-            }
+            
         });
     }
     else {

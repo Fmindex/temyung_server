@@ -41,7 +41,7 @@ router.put('/editcoworking/:id', function(req, res) {
     var db = req.db;
     var userToEdit = req.params.id;
     var collection = db.get('coworking');
-    collection.findAndModify({ query: { _id: userToEdit }, update: { $set: req.body }, new: true }, function(err, result){
+    collection.findOneAndUpdate({ _id: userToEdit }, req.body ).then(function(err, result){
         res.send(
             (err === null) ? { msg: '' } : { msg: err }
         );
