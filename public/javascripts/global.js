@@ -36,9 +36,10 @@ function populateTable() {
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function(){
             tableContent += '<tr>';
-            tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.name + '" myid="' + this._id + '" myimg="' + this.img + '" title="Show Details">' + this.name + '</a></td>';
+            tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.name + '" myid="' + this._id + '" myimg="' + this.img + '" myclick="' + this.click + '" title="Show Details">' + this.name + '</a></td>';
             tableContent += '<td>' + this.img + '</td>';
             tableContent += '<td>' + this.space + '</td>';
+            tableContent += '<td>' + this.click + '</td>';
             tableContent += '<td><a href="#" class="linkdeleteuser" rel="' + this._id + '">delete</a></td>';
             tableContent += '</tr>';
         });
@@ -49,7 +50,7 @@ function populateTable() {
 };
 
 // Show User Info
-var thisCoworkingName, thisCoworkingId, thisCoworkingImg;
+var thisCoworkingName, thisCoworkingId, thisCoworkingImg, thisCoworkingClick;
 function showCoworkingInfo(event) {
 
     // Prevent Link from Firing
@@ -59,7 +60,7 @@ function showCoworkingInfo(event) {
     thisCoworkingName = $(this).attr('rel');
     thisCoworkingId = $(this).attr('myid');
     thisCoworkingImg = $(this).attr('myimg');
-    
+    thisCoworkingClick = $(this).attr('myclick');
     console.log(thisCoworkingId);
     // Get Index of object based on id value
     var arrayPosition = coworkingListData.map(function(arrayItem) { return arrayItem.name; }).indexOf(thisCoworkingName);
@@ -91,7 +92,8 @@ function addCoworking(event) {
         var newCoworking = {
             'name': $('#addCoworking fieldset input#inputCoworkingName').val(),
             'img': $('#addCoworking fieldset input#inputCoworkingImg').val(),
-            'space': $('#addCoworking fieldset input#inputCoworkingSpace').val()
+            'space': $('#addCoworking fieldset input#inputCoworkingSpace').val(),
+            'click': 0,
         }
 
         // Use AJAX to post the object to our adduser service
@@ -182,7 +184,8 @@ function editCoworking(event) {
         var newCoworking = {
             'name': thisCoworkingName,
             'img': thisCoworkingImg,
-            'space': $('#editCoworking fieldset2 input#inputSpace').val()
+            'space': $('#editCoworking fieldset2 input#inputSpace').val(),
+            'click': thisCoworkingClick
         }
         console.log(newCoworking);
         console.log(thisCoworkingId);

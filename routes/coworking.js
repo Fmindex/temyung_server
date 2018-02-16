@@ -48,4 +48,15 @@ router.put('/editcoworking/:id', function(req, res) {
     });
 });
 
+router.put('/addclick/:id', function(req, res) {
+    var db = req.db;
+    var userToEdit = req.params.id;
+    var collection = db.get('coworking');
+    collection.findOneAndUpdate({ _id: userToEdit }, req.body ).then(function(err, result){
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+    });
+});
+
 module.exports = router;
