@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var ObjectId = require('mongodb').ObjectId; 
 /*
  * GET userlist.
  */
@@ -52,10 +52,16 @@ router.put('/addclick/:id', function(req, res) {
     var db = req.db;
     var userToEdit = req.params.id;
     var collection = db.get('coworking');
-    collection.findOneAndUpdate({ _id: userToEdit }, req.body ).then(function(err, result){
-        res.send(
-            (err === null) ? { msg: '' } : { msg: err }
-        );
+    // console.log(userToEdit);
+    collection.findOne({ _id: userToEdit }).then(function(err, result){
+        let newRes = err;
+        console.log(err.click);
+        newRes.click = parseInt(newRes.click) + 1;
+        collection.findOneAndUpdate({ _id: userToEdit }, newRes ).then(function(err, result){
+            res.send(
+                (err === null) ? { msg: '' } : { msg: err }
+            );
+        });
     });
 });
 
