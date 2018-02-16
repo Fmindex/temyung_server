@@ -36,10 +36,10 @@ function populateTable() {
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function(){
             tableContent += '<tr>';
-            tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.name + '" title="Show Details">' + this.name + '</a></td>';
-            tableContent += '<td rel="' + this.img + '" id="myimg">' + this.img + '</td>';
+            tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.name + '" myid="' + this._id + '" myimg="' + this.img + '" title="Show Details">' + this.name + '</a></td>';
+            tableContent += '<td>' + this.img + '</td>';
             tableContent += '<td>' + this.space + '</td>';
-            tableContent += '<td><a href="#" class="linkdeleteuser" id="del" rel="' + this._id + '">delete</a></td>';
+            tableContent += '<td><a href="#" class="linkdeleteuser" rel="' + this._id + '">delete</a></td>';
             tableContent += '</tr>';
         });
 
@@ -57,8 +57,8 @@ function showCoworkingInfo(event) {
 
     // Retrieve username from link rel attribute
     thisCoworkingName = $(this).attr('rel');
-    thisCoworkingId = $(del).attr('rel');
-    thisCoworkingImg = $(myimg).attr('rel');
+    thisCoworkingId = $(this).attr('myid');
+    thisCoworkingImg = $(this).attr('myimg');
     
     console.log(thisCoworkingId);
     // Get Index of object based on id value
