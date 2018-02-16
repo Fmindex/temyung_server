@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     // Add User button click
     $('#btnAddCoworking').on('click', addCoworking);
-    // $('#btnAddCoworking').on('click', editCoworking);
+    $('#btnEditCoworking').on('click', editCoworking);
 
     // Delete User link click
     $('#coworkingList table tbody').on('click', 'td a.linkdeleteuser', deleteCoworking);
@@ -49,13 +49,14 @@ function populateTable() {
 };
 
 // Show User Info
+var thisCoworkingName;
 function showCoworkingInfo(event) {
 
     // Prevent Link from Firing
     event.preventDefault();
 
     // Retrieve username from link rel attribute
-    var thisCoworkingName = $(this).attr('rel');
+    thisCoworkingName = $(this).attr('rel');
 
     // Get Index of object based on id value
     var arrayPosition = coworkingListData.map(function(arrayItem) { return arrayItem.name; }).indexOf(thisCoworkingName);
@@ -177,16 +178,16 @@ function editCoworking(event) {
 
         // If it is, compile all user info into one object
         var newCoworking = {
-            'name': $('#addCoworking fieldset input#inputCoworkingName').val(),
-            'img': $('#addCoworking fieldset input#inputCoworkingImg').val(),
-            'space': $('#addCoworking fieldset input#inputCoworkingSpace').val()
+            'name': $('#coworkingInfoName').val(),
+            'img': $('#coworkingInfoImg').val(),
+            'space': $('#coworkingInfo editCoworking fieldset2 input#inputSpace').val()
         }
 
         // Use AJAX to post the object to our adduser service
         $.ajax({
             type: 'PUT',
             data: newCoworking,
-            url: '/coworking/addcoworking/',
+            url: '/coworking/editcoworking/' + thisCoworkingName,
             dataType: 'JSON'
         }).done(function( response ) {
 
