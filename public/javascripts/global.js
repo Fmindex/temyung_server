@@ -40,6 +40,7 @@ function populateTable() {
             tableContent += '<td>' + this.img + '</td>';
             tableContent += '<td>' + this.space + '</td>';
             tableContent += '<td>' + this.click + '</td>';
+            tableContent += '<td>' + this.last_update + '</td>';
             tableContent += '<td><a href="#" class="linkdeleteuser" rel="' + this._id + '">delete</a></td>';
             tableContent += '</tr>';
         });

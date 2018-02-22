@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var ObjectId = require('mongodb').ObjectId; 
+var moment = require('moment');
 /*
  * GET userlist.
  */
@@ -16,8 +17,10 @@ router.get('/coworkinglist', function(req, res) {
  * POST to adduser.
  */
 router.post('/addcoworking', function(req, res) {
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     var db = req.db;
     var collection = db.get('coworking');
+    req.body.last_update = time;
     collection.insert(req.body, function(err, result){
         res.send(
             (err === null) ? { msg: '' } : { msg: err }
@@ -38,9 +41,11 @@ router.delete('/deletecoworking/:id', function(req, res) {
 });
 
 router.put('/editcoworking/:id', function(req, res) {
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     var db = req.db;
     var userToEdit = req.params.id;
     var collection = db.get('coworking');
+    req.body.last_update = time;
     collection.findOneAndUpdate({ _id: userToEdit }, req.body ).then(function(err, result){
         res.send(
             (err === null) ? { msg: '' } : { msg: err }
