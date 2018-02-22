@@ -17,7 +17,7 @@ router.get('/coworkinglist', function(req, res) {
  * POST to adduser.
  */
 router.post('/addcoworking', function(req, res) {
-    var time = moment().utcOffset('+0700').format('MMMM Do YYYY, h:mm:ss a');
+    var time = moment().utcOffset('+0700').format('MMMM Do YYYY, HH:mm:ss');
     var db = req.db;
     var collection = db.get('coworking');
     req.body.last_update = time;
@@ -41,7 +41,7 @@ router.delete('/deletecoworking/:id', function(req, res) {
 });
 
 router.put('/editcoworking/:id', function(req, res) {
-    var time = moment().utcOffset('+0700').format('MMMM Do YYYY, h:mm:ss a');
+    var time = moment().utcOffset('+0700').format('MMMM Do YYYY, HH:mm:ss');
     var db = req.db;
     var userToEdit = req.params.id;
     var collection = db.get('coworking');
