@@ -86,4 +86,24 @@ router.put('/addclick2/:id', function(req, res) {
         });
     });
 });
+
+router.get('/statclick', function(req, res) {
+    var db = req.db;
+    var collection = db.get('statclick');
+    collection.find({},{},function(e,docs){
+        res.json(docs);
+    });
+});
+
+router.post('/addstatclick', function(req, res) {
+    var time = moment().utcOffset('+0700').format('MMMM Do YYYY, HH:mm:ss');
+    var db = req.db;
+    var collection = db.get('statclick');
+    req.body.time = time;
+    collection.insert(req.body, function(err, result){
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+    });
+});
 module.exports = router;
