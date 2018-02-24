@@ -78,6 +78,9 @@ router.put('/addclick2/:id', function(req, res) {
     collection.findOne({ _id: userToEdit }).then(function(err, result){
         let newRes = err;
         console.log(err.click2);
+        if(newRes.click2 == null) {
+            newRes.click2 = 0;
+        }
         newRes.click2 = parseInt(newRes.click2) + 1;
         collection.findOneAndUpdate({ _id: userToEdit }, newRes ).then(function(err, result){
             res.send(
