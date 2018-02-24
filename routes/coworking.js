@@ -70,4 +70,20 @@ router.put('/addclick/:id', function(req, res) {
     });
 });
 
+router.put('/addclick2/:id', function(req, res) {
+    var db = req.db;
+    var userToEdit = req.params.id;
+    var collection = db.get('coworking');
+    // console.log(userToEdit);
+    collection.findOne({ _id: userToEdit }).then(function(err, result){
+        let newRes = err;
+        console.log(err.click2);
+        newRes.click2 = parseInt(newRes.click2) + 1;
+        collection.findOneAndUpdate({ _id: userToEdit }, newRes ).then(function(err, result){
+            res.send(
+                (err === null) ? { msg: '' } : { msg: err }
+            );
+        });
+    });
+});
 module.exports = router;
