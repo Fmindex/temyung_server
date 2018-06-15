@@ -1,53 +1,51 @@
 extends layout
 
 block content
-    h1= "Temyung Dashboard"
+    h1= "Dashboard"
     // Wrapper
     #wrapper
 
         // Coworking INFO
         #coworkingInfo
-            h2 Coworking Info
+            h2 NU MENU
             p
-                strong Name:
+                strong Author:
                 |  <span id='coworkingInfoName'></span>
                 br
-                strong Img:
+                strong Menu:
                 |  <span id='coworkingInfoImg'></span>
                 br
-                strong Space:
+                strong Number:
                 |  <span id='coworkingInfoSpace'></span>
             #editCoworking
                 fieldset2
-                    input#inputSpace(type='text', placeholder='editspace')
+                    input#inputSpace(type='text', placeholder='edit number')
                     br
-                    button#btnEditCoworking Edit Coworking
+                    button#btnEditCoworking Edit Menu
         // Coworking INFO
 
         // Coworking LIST
-        h2 Coworking List
+        h2 Menu List
         #coworkingList
             table
                 thead
-                    th Name
-                    th Img
-                    th Space
-                    th Click
-                    th Click2
+                    th Author
+                    th Menu
+                    th Number
                     th Last Update
                 tbody
         // Coworking LIST
 
         // ADD Coworking
-        h2 Add Coworking
+        h2 Add Menu
         #addCoworking
             fieldset
-                input#inputCoworkingName(type='text', placeholder='Name')
-                input#inputCoworkingImg(type='text', placeholder='Img')
+                input#inputCoworkingName(type='text', placeholder='Author')
+                input#inputCoworkingImg(type='text', placeholder='Menu')
                 br
-                input#inputCoworkingSpace(type='text', placeholder='Space')
+                input#inputCoworkingSpace(type='text', placeholder='Number')
                 br
-                button#btnAddCoworking Add Coworking
+                button#btnAddCoworking Add Menu
         // /ADD Coworking
 
 
